@@ -20,17 +20,17 @@
         <form method="POST">
             <select name="city" required>
                 <option value="" disabled selected>Choose a city...</option>
-                <option value="new_york">New York</option>
-                <option value="sydney">Sydney</option>
-                <option value="cape_town">Cape Town</option>
-                <option value="bangkok">Bangkok</option>
+                <option value="New York">New York</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Bangkok">Bangkok</option>
             </select>
             <button type="submit">Get Weather</button>
         </form>
 
         {% if weather %}
         <div class="result">
-            <h3>Weather in {{ weather.city }}</h3>
+            <h3>Weather in {{ weather.location }}</h3>
             <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
             <p><strong>Description:</strong> {{ weather.description }}</p>
             <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
