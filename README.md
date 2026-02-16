@@ -39,3 +39,4 @@ Cape Town
 Bangkok
 
 Screenshot of Expected UI
+![Weather Dashboard Screenshot](screenshot.png)
