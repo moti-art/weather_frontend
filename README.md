@@ -1,42 +1,74 @@
-# Weather Dashboard - Frontend Microservice
+# 🎨 Weather Dashboard (Frontend Microservice)
 
-This is the Frontend microservice of the Weather App. It provides a user-friendly interface to view live weather data from four major cities.
+[![CI for Weather Frontend](https://github.com/moti-art/weather_frontend/actions/workflows/ci.yaml/badge.svg)](https://github.com/moti-art/weather_frontend/actions)
 
-## How to Run Locally
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-Configure Backend URL:
-The frontend expects the backend to be available. By default, it looks for http://localhost:5000.
-If your backend is running elsewhere, set the environment variable:
+The **Weather Dashboard** is the user-facing component of the project. It provides a clean, responsive interface for users to monitor weather conditions across global hubs.
 
-Bash
-export BACKEND_URL="http://<your-backend-ip>:5000"
-Run the application:
+## 🚀 Key Features
+* **Interactive Dashboard:** Select cities from a dropdown to get instant weather updates.
+* **Dynamic Connectivity:** Connects to the Backend microservice via environment variables.
+* **GitOps Powered:** Automated deployments using GitHub Actions and ArgoCD.
+* **Dockerized:** Light-weight container optimized for production.
 
-Bash
-python app.py
-Access the UI: Open http://localhost:5001 in your browser.
+## 🛠️ Tech Stack
+* **Framework:** Flask (Python)
+* **Templating:** Jinja2 (HTML/CSS)
+* **CI/CD:** GitHub Actions
+* **Orchestration:** Kubernetes (K3s on AWS)
+* **Deployment:** GitOps via ArgoCD
 
-Running with Docker
-Build the image:
+## 🌐 Environment Variables
+The frontend requires the Backend API URL to function. This is managed via the `BACKEND_URL` variable:
+* **In Development:** `http://localhost:5000`
+* **In Kubernetes (Service Discovery):** `http://weather-backend:5000`
 
-Bash
-docker build -t weather-frontend .
+## 💻 Setup & Development
+
+### Local Execution
+1.  **Clone the Repo:**
+    ```bash
+    git clone [https://github.com/moti-art/weather_frontend.git](https://github.com/moti-art/weather_frontend.git)
+    cd weather_frontend
+    ```
+2.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Run with Backend URL:**
+    ```bash
+    export BACKEND_URL="http://localhost:5000"
+    python app.py
+    ```
+
+### Docker Support
+Build the frontend image:
+```bash
+docker build -t motinet/weather-frontend:latest .
+
 Run the container:
 
 Bash
-docker run -d -p 5001:5001 --name weather-frontend --add-host=host.docker.internal:host-gateway weather-frontend
-Dropdown Options for Cities
-The dashboard allows you to fetch weather data for the following locations:
+docker run -d -p 5001:5001 --name weather-frontend -e BACKEND_URL="http://backend-ip:5000" motinet/weather-frontend
+📍 Tracked Locations
+The dashboard currently monitors:
 
-New York
+🏙️ New York
 
-Sydney
+🇦🇺 Sydney
 
-Cape Town
+🇿🇦 Cape Town
 
-Bangkok
+🇹🇭 Bangkok
 
-Screenshot of Expected UI
-![Weather Dashboard Screenshot](screenshot.png)
+🔄 Automated Deployment (GitOps)
+This repository is part of a Full-Cycle CI/CD system:
+
+Code Change: Developer pushes to main.
+
+CI Build: GitHub Actions builds a new Docker image with a SHA tag.
+
+GitOps Push: The pipeline automatically updates the weather-gitops repository.
+
+K8s Sync: ArgoCD detects the change and updates the pods in the AWS Cluster.
+
+Maintained by Moti Levi
